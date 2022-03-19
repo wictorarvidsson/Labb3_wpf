@@ -1,0 +1,96 @@
+﻿<UserControl x:Class="WPFApp.Views.BookResidenceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFApp.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" d:Background="White">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <!--välj bostad-->
+        <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" FontSize="36" Margin="0,0,0,10" Text="Book your dream residence"/>
+        <ListBox Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" ItemsSource="{Binding ResidencesString,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="{Binding SelectedIndex}">
+
+        </ListBox>
+
+
+
+
+        <TextBlock Grid.Row="4" Grid.Column="1" Text="Search by city:" Margin="0,20,0,0" />
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding CitySearch}"/>
+
+        <StackPanel Grid.Column="3" Grid.Row="2" Grid.RowSpan="5" Margin="50,0,0,0">
+            <Label FontWeight="Bold">Facilities</Label>
+            <CheckBox VerticalContentAlignment="Center" IsChecked="{Binding Balcony, Mode=TwoWay}">Balcony</CheckBox>
+            <CheckBox VerticalContentAlignment="Center" IsChecked="{Binding Kitchen, Mode=TwoWay}">Kitchen</CheckBox>
+            <CheckBox VerticalContentAlignment="Center" IsChecked="{Binding Wifi, Mode=TwoWay}">Wifi</CheckBox>
+            <CheckBox VerticalContentAlignment="Center" IsChecked="{Binding Pool, Mode=TwoWay}">Pool</CheckBox>
+        </StackPanel>
+
+        <StackPanel Grid.Column="3" Grid.Row="7" Grid.RowSpan="5" Margin="50,20,0,0">
+            <Label FontWeight="Bold">Price per day</Label>
+            <RadioButton GroupName="price" VerticalContentAlignment="Center" IsChecked="{Binding price0to100, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">0 - 100</RadioButton>
+            <RadioButton GroupName="price" VerticalContentAlignment="Center" IsChecked="{Binding price100to200, Mode=TwoWay}">100 - 200</RadioButton>
+            <RadioButton GroupName="price" VerticalContentAlignment="Center" IsChecked="{Binding price200to300, Mode=TwoWay}">200 - 300</RadioButton>
+            <RadioButton GroupName="price" VerticalContentAlignment="Center" IsChecked="{Binding price300up, Mode=TwoWay}">300 -</RadioButton>
+            <RadioButton GroupName="price" VerticalContentAlignment="Center" IsChecked="{Binding priceAny, Mode=TwoWay}">Any</RadioButton>
+        </StackPanel>
+
+        <StackPanel Grid.Column="3" Grid.Row="13" Grid.RowSpan="5" Margin="50,20,0,0">
+            <Label FontWeight="Bold">Rating</Label>
+            <CheckBox VerticalContentAlignment="Center" IsChecked="{Binding Rating, Mode=TwoWay}">0-3</CheckBox>
+            <CheckBox VerticalContentAlignment="Center" IsChecked="{Binding Rating, Mode=TwoWay}">4</CheckBox>
+            <CheckBox VerticalContentAlignment="Center" IsChecked="{Binding Rating, Mode=TwoWay}">5</CheckBox>
+        </StackPanel>
+
+        <Button Command="{Binding CreateBookingCommand}" Content="See availability" FontSize="18" Margin="0,10,0,10" Grid.Column="1" Grid.Row="13"/>
+        <Button Command="{Binding SortCommand}" Content="Sort" FontSize="18" Margin="0,10,0,10" Grid.Column="3" Grid.Row="19"/>
+        
+        <!--tillbaka till meny -->
+        <Button Command="{Binding BackToMenuCommand}" CommandParameter="BackToMenu" Content="Back to menu" FontSize="18" Margin="0,10,0,10" Grid.Column="1" Grid.Row="19"/>
+
+    </Grid>
+</UserControl>
