@@ -26,6 +26,7 @@ namespace DataAccesLayer.Models
         public double PricePerDay { get; set; }
         public double Rating { get; set; }
         public string Description { get; set; }
+        public string ImageUrl { get; set; }
         public List<Review> Reviews { get; set; }
 
         //IMAGE

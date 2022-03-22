@@ -19,6 +19,7 @@ namespace WPFApp.ViewModels
         public string MaxGuests { get; set; }
         public string PricePerDay { get; set; }
         public string Description { get; set; }
+        public string ImageUrl { get; set; }
         public bool Balcony { get; set; }
         public bool Kitchen { get; set; }
         public bool Wifi { get; set; }
@@ -63,6 +64,12 @@ namespace WPFApp.ViewModels
                             result = "Price per day needs to be a number";
                         }
                         break;
+                    case "ImageUrl":
+                        if (ImageUrl != null && !IsImageUrl())
+                        {
+                            result = "Image link needs to end with .png or .jpg";
+                        }
+                        break;
                 }
 
                 if (ErrorCollection.ContainsKey(name))
@@ -89,9 +96,25 @@ namespace WPFApp.ViewModels
             //button works if ErrorCollection doesnt contain any strings
             if (!InputErrorExists())
             {
-                App.ResidenceController.AddNewResidence(mainViewModel.LoggedInUser, Street, City, State, Convert.ToInt32(PostalCode), Country, Balcony, Kitchen, Wifi, Pool, Convert.ToInt32(MaxGuests), Convert.ToDouble(PricePerDay), Description);
+                App.ResidenceController.AddNewResidence(mainViewModel.LoggedInUser, Street, City, State, Convert.ToInt32(PostalCode), Country, Balcony, Kitchen, Wifi, Pool, Convert.ToInt32(MaxGuests), Convert.ToDouble(PricePerDay), Description, ImageUrl);
                 mainViewModel.SelectedViewModel = new MenuViewModel(mainViewModel);
             }
+        }
+
+        private bool IsImageUrl()
+        {
+            if (ImageUrl.Length >= 4)
+            {
+                if (ImageUrl.Substring(ImageUrl.Length - 4).ToLower() == ".png" || ImageUrl.Substring(ImageUrl.Length - 4).ToLower() == ".jpg")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
         }
     }
 }

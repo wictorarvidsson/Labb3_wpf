@@ -80,7 +80,7 @@ namespace BusinessLayer.Controllers
         }
 
         //add new residence/ad
-        public void AddNewResidence(DataAccesLayer.Models.User user, string street, string city, string state, int postalCode, string country, bool balcony, bool kitchen, bool wifi, bool pool, int maxGuests, double pricePerDay, string description)
+        public void AddNewResidence(DataAccesLayer.Models.User user, string street, string city, string state, int postalCode, string country, bool balcony, bool kitchen, bool wifi, bool pool, int maxGuests, double pricePerDay, string description, string imageUrl)
         {
             DataAccesLayer.Models.Residence residence = new DataAccesLayer.Models.Residence()
             {
@@ -96,7 +96,8 @@ namespace BusinessLayer.Controllers
                 Pool = pool,
                 MaxGuests = maxGuests,
                 PricePerDay = pricePerDay,
-                Description = description
+                Description = description,
+                ImageUrl = imageUrl
             };
 
             unitOfWork.ResidenceRepository.Add(residence);

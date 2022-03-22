@@ -38,6 +38,7 @@ namespace WPFApp.ViewModels
             }
         }
 
+        public string ImageUrl { get; set; }
         public string NumberOfGuests { get; set; }
         public DateTime SelectedFromDate { get; set; }
 
@@ -79,6 +80,7 @@ namespace WPFApp.ViewModels
             SelectedFromDate = DateTime.Today;
             SelectedToDate = DateTime.Today;
             BackToMenuCommand = new UpdateViewCommand(mainViewModel);
+            ImageUrl = mainViewModel.selectedResidence.ImageUrl;
         }
 
         public void CreateBooking()
