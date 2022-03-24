@@ -5,6 +5,7 @@ using System.Windows.Input;
 using DataAccesLayer.Models;
 using WPFApp.ViewModels.Commands;
 using System.Diagnostics;
+using System.Collections.ObjectModel;
 
 namespace WPFApp.ViewModels
 {
@@ -13,7 +14,20 @@ namespace WPFApp.ViewModels
         public ICommand BackToMenuCommand { get; set; }
         public int SelectedIndex { get; set; }
         public List<Booking> MyBookings { get; set; }
-        public List<string> MyBookingsString { get; set; }
+
+        private ObservableCollection<string> _myBookingsString;
+        public ObservableCollection<string> MyBookingsString
+        {
+            get
+            {
+                return _myBookingsString;
+            }
+            set
+            {
+                _myBookingsString = value;
+                OnPropertyChanged(nameof(MyBookingsString));
+            }
+        }
         public List<OldBooking> myOldBookings = new List<OldBooking>();
         public MainViewModel mainViewModel;
         private ICommand _cancelBookingCommand;
@@ -31,7 +45,7 @@ namespace WPFApp.ViewModels
             this.mainViewModel = mainViewModel;
             MyBookings = App.BookingController.ReturnBookingsByUser(mainViewModel.LoggedInUser);
 
-            MyBookingsString = new List<string>();
+            MyBookingsString = new ObservableCollection<string>();
             foreach(Booking booking in MyBookings)
             {
                 MyBookingsString.Add("ID: " + booking.BookingID + ". Total pris: " + booking.TotalPrice + ".");
@@ -40,10 +54,10 @@ namespace WPFApp.ViewModels
 
         public void CancelBooking()
         {
-            Trace.WriteLine(SelectedIndex);
-            Trace.WriteLine(MyBookings[SelectedIndex].BookingID);
-            Trace.WriteLine(mainViewModel.LoggedInUser.Username);
-            App.BookingController.RemoveBookingByUser(MyBookings[SelectedIndex].BookingID, mainViewModel.LoggedInUser);
+            if (App.BookingController.RemoveBookingByUser(MyBookings[SelectedIndex].BookingID, mainViewModel.LoggedInUser))
+            {
+                MyBookingsString.RemoveAt(SelectedIndex);
+            }
         }
     }
 }

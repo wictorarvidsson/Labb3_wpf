@@ -40,7 +40,27 @@ namespace WPFApp.ViewModels
 
         public string ImageUrl { get; set; }
         public string NumberOfGuests { get; set; }
-        public DateTime SelectedFromDate { get; set; }
+
+        private DateTime _selectedFromDate;
+        public DateTime SelectedFromDate
+        {
+            get
+            {
+                return _selectedFromDate;
+            }
+            set
+            {
+                _selectedFromDate = value;
+                if (SelectedFromDate < DateTime.Today || (SelectedToDate - SelectedFromDate).TotalDays < 0)
+                {
+                    TotalPrice = "Invalid selection";
+                }
+                else
+                {
+                    TotalPrice = ((SelectedToDate - SelectedFromDate).TotalDays * mainViewModel.selectedResidence.PricePerDay).ToString() + "kr";
+                }
+            }
+        }
 
         private DateTime _selectedToDate;
         public DateTime SelectedToDate
@@ -52,10 +72,11 @@ namespace WPFApp.ViewModels
             set
             {
                 _selectedToDate = value;
-                if ((SelectedToDate - SelectedFromDate).TotalDays < 0)
+                if ((SelectedToDate - SelectedFromDate).TotalDays < 0 || SelectedFromDate < DateTime.Today)
                 {
                     TotalPrice = "Invalid selection";
                 }
+
                 else
                 {
                     TotalPrice = ((SelectedToDate - SelectedFromDate).TotalDays * mainViewModel.selectedResidence.PricePerDay).ToString() + "kr";
@@ -85,7 +106,7 @@ namespace WPFApp.ViewModels
 
         public void CreateBooking()
         {
-            if (!CheckIfReserved())
+            if (!CheckIfReserved() && TotalPrice != "Invalid selection")
             {
                 int NumberOfGuestsint = Convert.ToInt32(NumberOfGuests);
                 App.BookingController.NewBooking(mainViewModel.selectedResidence, mainViewModel.LoggedInUser, SelectedFromDate, SelectedToDate, NumberOfGuestsint);

@@ -76,7 +76,7 @@ namespace BusinessLayer.Controllers
         }
 
         //remove booking by user that booked the residence
-        public void RemoveBookingByUser(int bookingId, DataAccesLayer.Models.User user)
+        public bool RemoveBookingByUser(int bookingId, DataAccesLayer.Models.User user)
         {
             //check date
             DataAccesLayer.Models.Booking booking = unitOfWork.BookingRepository.FirstOrDefault(b => b.BookingID == bookingId);
@@ -86,6 +86,11 @@ namespace BusinessLayer.Controllers
                 unitOfWork.OldBookingRepository.Add(new DataAccesLayer.Models.OldBooking() { Booking = booking });
                 unitOfWork.BookingRepository.Remove(booking);
                 unitOfWork.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

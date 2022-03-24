@@ -67,7 +67,7 @@ namespace WPFApp.ViewModels
                     case "ImageUrl":
                         if (ImageUrl != null && !IsImageUrl())
                         {
-                            result = "Image link needs to end with .png or .jpg";
+                            result = "Image link needs to end with .png, .jpg or .jpeg";
                         }
                         break;
                 }
@@ -105,7 +105,7 @@ namespace WPFApp.ViewModels
         {
             if (ImageUrl.Length >= 4)
             {
-                if (ImageUrl.Substring(ImageUrl.Length - 4).ToLower() == ".png" || ImageUrl.Substring(ImageUrl.Length - 4).ToLower() == ".jpg")
+                if (ImageUrl.Substring(ImageUrl.Length - 4).ToLower() == ".png" || ImageUrl.Substring(ImageUrl.Length - 4).ToLower() == ".jpg" || ImageUrl.Substring(ImageUrl.Length - 4).ToLower() == "jpeg")
                 {
                     return true;
                 }

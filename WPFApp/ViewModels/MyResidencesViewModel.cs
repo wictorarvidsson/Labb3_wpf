@@ -53,7 +53,6 @@ namespace WPFApp.ViewModels
         {
             BackToMenuCommand = new UpdateViewCommand(mainViewModel);
             CreateAdCommand = new UpdateViewCommand(mainViewModel);
-            //EditAdCommand = new UpdateViewCommand(mainViewModel);
             this.mainViewModel = mainViewModel;
             MyResidences = App.ResidenceController.GetByOwner(mainViewModel.LoggedInUser);
             MyResidencesString = new ObservableCollection<string>();
