@@ -29,6 +29,7 @@ namespace WPFApp.ViewModels
 
         public string Error => throw new NotImplementedException();
 
+        //Sets data error info based on user input
         public string this[string name]
         {
             get

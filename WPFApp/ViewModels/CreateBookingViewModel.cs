@@ -11,6 +11,8 @@ namespace WPFApp.ViewModels
     class CreateBookingViewModel : BaseViewModel
     {
         private string _reservedString;
+        
+        //Used to display if residence is selected during selected dates
         public string ReservedString
         {
             get
@@ -51,6 +53,7 @@ namespace WPFApp.ViewModels
             set
             {
                 _selectedFromDate = value;
+                //Error handling for invalid date selection, cant select before today
                 if (SelectedFromDate < DateTime.Today || (SelectedToDate - SelectedFromDate).TotalDays < 0)
                 {
                     TotalPrice = "Invalid selection";
@@ -72,6 +75,7 @@ namespace WPFApp.ViewModels
             set
             {
                 _selectedToDate = value;
+                //Error handling for invalid date selection, cant select before today or have a negative amount of days selected
                 if ((SelectedToDate - SelectedFromDate).TotalDays < 0 || SelectedFromDate < DateTime.Today)
                 {
                     TotalPrice = "Invalid selection";
@@ -114,6 +118,7 @@ namespace WPFApp.ViewModels
             }
         }
 
+        //Checks if selected residence is reserved during selected dates
         public bool CheckIfReserved()
         {
             foreach(DateTime d in App.BookingController.ReturnBookedDays(mainViewModel.selectedResidence))

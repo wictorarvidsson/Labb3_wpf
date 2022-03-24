@@ -8,6 +8,7 @@ namespace WPFApp.ViewModels
 {
     public abstract class BaseViewModel : INotifyPropertyChanged
     {
+        //Error message collection for each viewmodel
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -16,6 +17,8 @@ namespace WPFApp.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
+
+        //Checks if ErrorCollection is empty before executing commands
         public bool InputErrorExists()
         {
             foreach (KeyValuePair<string, string> entry in ErrorCollection)

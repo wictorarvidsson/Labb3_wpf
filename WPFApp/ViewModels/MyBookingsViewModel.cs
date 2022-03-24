@@ -53,7 +53,8 @@ namespace WPFApp.ViewModels
         }
 
         public void CancelBooking()
-        {
+        {   
+            //Only removes string from MyBookingsString if removal of booking is succesful (cant remove old bookings etc)
             if (App.BookingController.RemoveBookingByUser(MyBookings[SelectedIndex].BookingID, mainViewModel.LoggedInUser))
             {
                 MyBookingsString.RemoveAt(SelectedIndex);

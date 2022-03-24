@@ -12,7 +12,6 @@ namespace WPFApp.ViewModels
     {
         public int SelectedIndex { get; set; }
         public ICommand CreateAdCommand { get; set; }
-        //public ICommand EditAdCommand { get; set; }
         public List<Residence> MyResidences { get; set; }
 
         private ObservableCollection<string> _myResidenceString;
@@ -80,8 +79,6 @@ namespace WPFApp.ViewModels
 
             App.ResidenceController.RemoveResidence(MyResidences[SelectedIndex].ResidenceID, mainViewModel.LoggedInUser);
             MyResidencesString.RemoveAt(SelectedIndex);
-
-            //uppdatera vyn
         }
     }
 }

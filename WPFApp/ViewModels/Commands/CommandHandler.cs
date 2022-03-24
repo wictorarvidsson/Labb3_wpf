@@ -10,6 +10,7 @@ namespace WPFApp.ViewModels.Commands
         private Action _action;
         public event EventHandler CanExecuteChanged;
 
+        //Takes Action parameter, method to be executed is written in the class that instantiates this class
         public CommandHandler(Action action)
         {
             _action = action;

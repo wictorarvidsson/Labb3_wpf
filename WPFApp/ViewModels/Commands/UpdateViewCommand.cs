@@ -23,6 +23,7 @@ namespace WPFApp.ViewModels.Commands
             return true;
         }
 
+        //Sets SelectedViewModel based on CommandParameter from xaml view
         public void Execute(object parameter)
         {
             if (parameter.ToString() == "BookResidence")
@@ -57,12 +58,7 @@ namespace WPFApp.ViewModels.Commands
             {
                 mainViewModel.SelectedViewModel = new LoginViewModel(mainViewModel);
             }
-
-
-            //mainViewModel.SelectedViewModel = new RegisterViewModel(mainViewModel);
-            Console.WriteLine("test");
-        }
-        
+        }      
     }
 }
 

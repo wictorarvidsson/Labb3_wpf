@@ -10,7 +10,6 @@ namespace WPFApp.ViewModels
 {
     class CreateAdViewModel : BaseViewModel , IDataErrorInfo
     {
-        //public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>(); 
         public string Street { get; set; }
         public string City { get; set; }
         public string State { get; set; }
@@ -38,6 +37,7 @@ namespace WPFApp.ViewModels
 
         public string Error => throw new NotImplementedException();
 
+        //Sets data error info based on user input
         public string this[string name]
         {
             get
@@ -101,6 +101,7 @@ namespace WPFApp.ViewModels
             }
         }
 
+        //Checks if URL input ends with .png, .jpg or .jpeg
         private bool IsImageUrl()
         {
             if (ImageUrl.Length >= 4)

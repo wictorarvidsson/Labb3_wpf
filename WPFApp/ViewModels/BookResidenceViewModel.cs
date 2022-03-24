@@ -14,19 +14,18 @@ namespace WPFApp.ViewModels
     public class BookResidenceViewModel : BaseViewModel
     {
         public int SelectedIndex { get; set; }
-
         public List<Residence> Residences { get; set; }
 
-        private ObservableCollection<string> residencesString;
+        private ObservableCollection<string> _residencesString;
         public ObservableCollection<string> ResidencesString
         {
             get
             {
-                return residencesString;
+                return _residencesString;
             }
             set
             {
-                residencesString = value;
+                _residencesString = value;
                 OnPropertyChanged(nameof(ResidencesString));
             }
         }
@@ -69,22 +68,23 @@ namespace WPFApp.ViewModels
             BackToMenuCommand = new UpdateViewCommand(mainViewModel);
             this.mainViewModel = mainViewModel;
             Residences = App.ResidenceController.GetAll();
-            residencesString = new ObservableCollection<string>();
+            ResidencesString = new ObservableCollection<string>();
             CreateResidenceString();
             CitySearch = "";
         }
 
+        //Creates collection of strings based on residences collection
         public void CreateResidenceString()
         {
-            residencesString.Clear();
+            ResidencesString.Clear();
             foreach (Residence r in Residences)
             {
-                residencesString.Add("Adress: " + r.Street + ", " + r.City + ", Price/day: " + r.PricePerDay + ", Rating: " + r.Rating);
+                ResidencesString.Add("Adress: " + r.Street + ", " + r.City + ", Price/day: " + r.PricePerDay + ", Rating: " + r.Rating);
             }
 
-            if (residencesString.Count == 0)
+            if (ResidencesString.Count == 0)
             {
-                residencesString.Add("No matches found for your search.");
+                ResidencesString.Add("No matches found for your search.");
             }
         }
 
@@ -94,15 +94,14 @@ namespace WPFApp.ViewModels
             mainViewModel.SelectedViewModel = new CreateBookingViewModel(mainViewModel);
         }
 
+        //Sorts ObservableCollection for ListBox in BookResidenceView
         public void SortResidenceList()
         {
-
             Residences = App.ResidenceController.GetByFacilites(Balcony, Kitchen, Wifi, Pool);
             if (CitySearch.ToCharArray().Length > 0)
             {
                 Residences = Residences.Where(r => r.City.Contains(CitySearch)).ToList();
             }
-
             if (price0to100)
             {
                 Residences = Residences.Where(r => r.PricePerDay <= 100).ToList();
@@ -119,10 +118,7 @@ namespace WPFApp.ViewModels
             {
                 Residences = Residences.Where(r => r.PricePerDay >= 300).ToList();
             }
-
             CreateResidenceString();
-            //OnPropertyChanged(nameof(ResidencesString));
-            Trace.WriteLine("sorted");
         }
     }
 }

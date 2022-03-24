@@ -15,6 +15,8 @@ namespace WPFApp.ViewModels
         public Residence SelectedResidenceToEdit;
         public Residence selectedResidence;
         public User LoggedInUser;
+
+        //SelectedViewModel binds to ContentControl Content in MainView.xaml and displays the selected User Control
         public BaseViewModel SelectedViewModel 
         {
             get { return _selectedViewModel; }
