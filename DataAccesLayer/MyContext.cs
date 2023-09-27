@@ -11,7 +11,9 @@ namespace DataAccesLayer
 {
     public class MyContext : DbContext
     {
-        private string connectionString = "Server=sqlutb2.hb.se,56077;Database=osu2208;user id=osu2208; password=ft2388;";
+
+        // Project used a database provided by school which is no longer in use
+        private string connectionString = "";
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Residence> Residences { get; set; }
         public DbSet<Review> Reviews { get; set; }
